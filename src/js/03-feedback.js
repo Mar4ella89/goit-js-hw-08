@@ -6,7 +6,7 @@ const textarea = document.querySelector('.feedback-form textarea');
 
 const STORAGE_KEY = 'feedback-data';
 
-const formData = {};
+let formData = {};
 
 const onFormSubmit = event => {
   event.preventDefault();
@@ -29,19 +29,17 @@ const onFormData = event => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 };
 
-loginFofmEl.addEventListener('submit', onFormSubmit);
-loginFofmEl.addEventListener('input', throttle(onFormData, 500));
-
 const populateTextarea = () => {
-  const savedData = localStorage.getItem(STORAGE_KEY);
-  const parsedData = JSON.parse(savedData);
-
-  console.log(parsedData);
-
-  // if (parsedData) {
-    emailInput.value = parsedData.email || '';
-    textarea.value = parsedData.message || '';
-  // }
+  if (localStorage.getItem(STORAGE_KEY)) {
+    const savedData = localStorage.getItem(STORAGE_KEY);
+    formData = JSON.parse(savedData);
+    console.log(formData);
+  }
+  emailInput.value = formData.email;
+  textarea.value = formData.message;
 };
 
 populateTextarea();
+
+loginFofmEl.addEventListener('submit', onFormSubmit);
+loginFofmEl.addEventListener('input', throttle(onFormData, 500));
