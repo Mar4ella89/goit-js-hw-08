@@ -38,10 +38,10 @@ const populateTextarea = () => {
 
   console.log(parsedData);
 
-  if (parsedData) {
-    emailInput.value = parsedData.email;
-    textarea.value = parsedData.message;
-  }
+  // if (parsedData) {
+    emailInput.value = parsedData.email || '';
+    textarea.value = parsedData.message || '';
+  // }
 };
 
 populateTextarea();
