@@ -37,6 +37,11 @@ const populateTextarea = () => {
   }
   emailInput.value = formData.email;
   textarea.value = formData.message;
+
+  // console.log(loginFofmEl.elements)
+  // for (const key in formData) {
+  //   loginFofmEl.elements[key].value = formData[key]
+  // }
 };
 
 populateTextarea();
