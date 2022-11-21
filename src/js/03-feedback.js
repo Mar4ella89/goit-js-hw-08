@@ -30,18 +30,24 @@ const onFormData = event => {
 };
 
 const populateTextarea = () => {
-  if (localStorage.getItem(STORAGE_KEY)) {
-    const savedData = localStorage.getItem(STORAGE_KEY);
-    formData = JSON.parse(savedData);
-    console.log(formData);
-  }
-  emailInput.value = formData.email;
-  textarea.value = formData.message;
+  try {
+    if (localStorage.getItem(STORAGE_KEY)) {
+      const savedData = localStorage.getItem(STORAGE_KEY);
+      formData = JSON.parse(savedData);
+      console.log(formData);
 
-  // console.log(loginFofmEl.elements)
-  // for (const key in formData) {
-  //   loginFofmEl.elements[key].value = formData[key]
-  // }
+      // emailInput.value = formData.email;
+      // textarea.value = formData.message;
+
+      // console.log(loginFofmEl.elements)
+      for (const key in formData) {
+        loginFofmEl.elements[key].value = formData[key];
+      }
+    }
+  } catch (error) {
+    console.error('Get state error: ', error.message);
+    return formData = {}
+  }
 };
 
 populateTextarea();
